@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/actionCreators/productAction';
 import { ADD_TO_CART } from '../../redux/actionTypes/productActionTypes';
 
 const ProductCard = ({ product }) => {
@@ -12,7 +13,7 @@ const ProductCard = ({ product }) => {
             <h3>{model}</h3>
             <p>Price: ${price}</p>
             <p>Rating: {rating}star</p>
-            <button onClick={() => dispatch({ type: ADD_TO_CART, payload: product })} className='product-cart-button'>Add to card</button>
+            <button onClick={() => dispatch(addToCart(product))} className='product-cart-button'>Add to card</button>
         </div>
     );
 };
