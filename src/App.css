@@ -60,3 +60,15 @@
   font-size: medium;
   cursor: pointer;
 }
+
+.product-remove-button {
+  background-color: brown;
+  width: 95%;
+  border: none;
+  height: 40px;
+  border-radius: 10px;
+  color: #ffff;
+  font-weight: bold;
+  font-size: medium;
+  cursor: pointer;
+}
