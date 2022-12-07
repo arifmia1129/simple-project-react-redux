@@ -11,13 +11,28 @@ const productReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_TO_CART:
             if (selectedProduct) {
-                return state
+                const newCart = state.cart.filter(c => c.model !== selectedProduct.model);
+
+                selectedProduct.quantity = selectedProduct.quantity + 1;
+                return {
+                    ...state,
+                    cart: [...newCart, selectedProduct]
+                }
             }
             return {
                 ...state,
                 cart: [...state.cart, { ...action.payload, quantity: 1 }]
             }
         case REMOVE_FROM_CART:
+            if (selectedProduct.quantity > 1) {
+                const newCart = state.cart.filter(c => c.model !== selectedProduct.model);
+
+                selectedProduct.quantity = selectedProduct.quantity - 1;
+                return {
+                    ...state,
+                    cart: [...newCart, selectedProduct]
+                }
+            }
             return {
                 ...state,
                 cart: state.cart.filter(c => c.model !== action.payload.model)
