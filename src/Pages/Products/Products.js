@@ -23,6 +23,29 @@ const Products = () => {
     const activeClass = "p-3 rounded-full mx-2 bg-indigo-800 border-0 font-bold text-white";
     const inActiveClass = "btn p-3 cursor-pointer border-4 rounded-full mx-2";
 
+    let content;
+
+    if (products.length) {
+        content = products.map((product, index) => <ProductCard key={index} product={product} />)
+    }
+
+    if (products.length && (stock || brand)) {
+        content = products
+            .filter(product => {
+                if (stock) {
+                    return product.status === true;
+                }
+                return product;
+            })
+            .filter(product => {
+                if (brand.length) {
+                    return brand.includes(product.brand);
+                }
+                return product;
+            })
+            .map((product, index) => <ProductCard key={index} product={product} />)
+    }
+
     return (
         <div>
             <div className='grid place-content-end mt-5'>
@@ -38,7 +61,7 @@ const Products = () => {
 
             <div className="products">
                 {
-                    products.map((product, index) => <ProductCard key={index} product={product} />)
+                    content
                 }
             </div>
         </div>
