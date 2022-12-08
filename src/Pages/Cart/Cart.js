@@ -10,7 +10,7 @@ const Cart = () => {
             <div className='products'>
                 {
                     cartProducts?.length ?
-                        cartProducts.sort((a, b) => a.id - b.id).map((product, index) => <ProductCard
+                        cartProducts.sort((a, b) => a.position - b.position).map((product, index) => <ProductCard
                             key={index}
                             product={product}
                         />)
