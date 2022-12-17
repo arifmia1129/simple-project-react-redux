@@ -1,4 +1,4 @@
-import { ADD_TO_CART, LOAD_PRODUCTS, REMOVE_FROM_CART } from "../actionTypes/productActionTypes";
+import { ADD_PRODUCTS, ADD_TO_CART, LOAD_PRODUCTS, REMOVE_FROM_CART } from "../actionTypes/productActionTypes";
 
 const initialState = {
     products: [],
@@ -14,6 +14,11 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: action.payload
+            }
+        case ADD_PRODUCTS:
+            return {
+                ...state,
+                products: [...state.products, action.payload]
             }
         case ADD_TO_CART:
             if (selectedProduct) {
