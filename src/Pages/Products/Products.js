@@ -1,31 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleBrand, toggleStock } from '../../features/filter/filterSlice';
+import { getProducts } from '../../features/products/productsSlice';
 import fetchProducts from '../../redux/thunk/products/fetchProduct';
 import ProductCard from './ProductCard';
 
 const Products = () => {
 
     const dispatch = useDispatch();
-    const [products, setProducts] = useState('');
+    // const [products, setProducts] = useState('');
 
     useEffect(() => {
-        // dispatch(fetchProducts());
-        const handleProducts = async () => {
-            const res = await fetch("https://raw.githubusercontent.com/mir-hussain/moon-tech-starter-pack/version-2/public/products.json");
-
-            const data = await res.json();
-            if (data.length) {
-                setProducts(data)
-            }
-        }
-        handleProducts();
+        dispatch(getProducts());
     }, [dispatch])
 
     const state = useSelector(state => state);
 
     const filter = state.filter;
-    // const products = state.product.products;
+    const products = state.products.products;
 
     const { brand, stock } = filter;
 
