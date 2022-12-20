@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useGetProductQuery } from '../../features/api/apiSlice';
 import { toggleBrand, toggleStock } from '../../features/filter/filterSlice';
 import { getProducts } from '../../features/products/productsSlice';
 import fetchProducts from '../../redux/thunk/products/fetchProduct';
@@ -9,7 +10,7 @@ const Products = () => {
 
     const dispatch = useDispatch();
     // const [products, setProducts] = useState('');
-
+    const { data: products, error, isLoading } = useGetProductQuery(null, { refetchOnMountOrArgChange: true });
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch])
@@ -17,7 +18,7 @@ const Products = () => {
     const state = useSelector(state => state);
 
     const filter = state.filter;
-    const products = state.products.products;
+    // const products = state.products.products;
 
     const { brand, stock } = filter;
 
@@ -45,6 +46,10 @@ const Products = () => {
                 return product;
             })
             .map((product, index) => <ProductCard key={index} product={product} />)
+    }
+
+    if (isLoading) {
+        return <p>Loading....</p>
     }
 
     return (

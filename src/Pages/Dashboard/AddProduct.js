@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAddProductMutation, useDeleteProductMutation } from '../../features/api/apiSlice';
 import { postProduct } from '../../features/products/productsSlice';
 import { addProducts } from '../../redux/actionCreators/productAction';
 
 const AddProduct = () => {
     const dispatch = useDispatch();
+
+    // const [addProduct, { isError, isLoading, isSuccess }] = useAddProductMutation(product)
+
+    // const [deleteProduct, {isError,isLoading}] = useDeleteProductMutation(id)
 
     const handlePostProduct = () => {
         dispatch(postProduct({
