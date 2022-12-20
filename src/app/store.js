@@ -10,5 +10,5 @@ export const store = configureStore({
         filter: filterReducer,
         products: productReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat()
 })

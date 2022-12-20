@@ -1,56 +1,59 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { postProduct } from '../../features/products/productsSlice';
 import { addProducts } from '../../redux/actionCreators/productAction';
 
 const AddProduct = () => {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(addProducts({
-            "_id": 9,
-            "model": "AMD Ryzen 7 5800X3D Gaming PC",
-            "image": "https://live.staticflickr.com/65535/52521844332_5f738162d8_o.jpg",
+    const handlePostProduct = () => {
+        dispatch(postProduct({
+            "_id": 1,
+            "model": "AMD Ryzen 5 5600X Gaming PC",
+            "image": "https://live.staticflickr.com/65535/52522584794_4a9898a992_o.jpg",
             "status": true,
             "brand": "amd",
             "keyFeature": [
-                "AMD Ryzen 7 5800X3D Processor",
-                "ASROCK B550 STEEL LEGEND AMD B550 Chipset Motherboard",
-                "32GB DDR4 RAM + 500GB PCIe 3.0 NVMe SSD",
-                "Colorful GeForce RTX 4090 NB EX-V 24GB GDDR6X Graphics Card"
+                "Gigabyte B550M DS3H AM4 AMD Micro ATX Motherboard",
+                "PNY GeForce RTX 3070 8GB UPRISING Dual Fan LHR GDDR6 Graphics Card",
+                "AMD RYZEN 5 5600X PROCESSOR",
+                "16GB 3200MHz DDR4 RAM+ 128GB M.2 PCIe SSD"
             ],
-            "price": 399999,
+            "price": 128200,
             "rating": 3,
             "spec": [
                 {
-                    "processor": "AMD Ryzen 7 5800X3D Processor"
+                    "processor": "AMD RYZEN 5 5600X PROCESSOR"
                 },
                 {
-                    "motherboard": "ASRock B550 Steel Legend DDR4 AMD AM4 ATX Motherboard"
+                    "motherboard": "Gigabyte B550M DS3H AM4 AMD Micro ATX Motherboard"
                 },
                 {
-                    "ram": "Team T-Force Night Hawk RGB 8GB (KIT) 3200MHz DDR4 RAM (4 UNIT)"
+                    "ram": "Corsair Vengeance LPX 16GB DDR4 DRAM 3200MHz RAM"
                 },
                 {
-                    "graphics": "Colorful GeForce RTX 4090 NB EX-V 24GB GDDR6X Graphics Card"
+                    "graphics": "PNY GeForce RTX 3070 8GB UPRISING Dual Fan LHR GDDR6 Graphics Card"
                 },
                 {
-                    "storage": "Samsung 980 Pro 500GB PCIe 4.0 M.2 NVMe SSD"
+                    "storage": "Team MP33 128GB M.2 PCIe SSD Toshiba P300 1TB Desktop PC Internal Hard Drive"
                 },
                 {
-                    "casing": "Antec TORQUE Black + Red Aluminum ATX Mid Tower Gaming Casing"
+                    "casing": "Antec NX420 Mid Tower ARGB Gaming Case"
                 },
                 {
-                    "psu": "Antec HCG-750 Gold Series 750W Full Modular Power Supply"
+                    "psu": "Antec CUPRUM STRIKE CSK 650W 80 Plus Bronze Power Supply"
                 },
                 {
-                    "cooler": "Antec Prizm X 120 ARGB 3+C Cooling Fan"
+                    "cooler": "Gamdias Boreas M1-610 ARGB CPU Cooler"
                 }
             ]
         }))
-    }, [dispatch])
+    }
+
     return (
         <div>
             <h1>This is add product route</h1>
+            <button className='border' onClick={handlePostProduct}>Add Product</button>
         </div>
     );
 };

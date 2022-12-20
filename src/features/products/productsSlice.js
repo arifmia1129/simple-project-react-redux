@@ -1,17 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { fetchingProducts } from "./productsApi";
 
 const initialState = {
     products: [],
     isPending: false,
     isError: false,
+    postSuccess: false,
     error: ''
 }
 
 export const getProducts = createAsyncThunk('products/getProducts', async () => {
-    const res = await fetch("https://raw.githubusercontent.com/mir-hussain/moon-tech-starter-pack/version-2/public/products.json");
-
-    const data = await res.json();
-    return data;
+    const products = fetchingProducts();
+    return products;
+})
+export const postProduct = createAsyncThunk('products/postProduct', async (product) => {
+    return product;
 })
 
 const productsSlice = createSlice({
@@ -36,6 +39,25 @@ const productsSlice = createSlice({
                 state.isError = true;
                 state.error = action.error.message;
                 state.isPending = false
+            })
+            .addCase(postProduct.pending, (state, action) => {
+                state.isError = false;
+                state.error = '';
+                state.postSuccess = false;
+                state.isPending = true
+            })
+            .addCase(postProduct.fulfilled, (state, action) => {
+                state.products.push(action.payload);
+                state.isError = false;
+                state.error = '';
+                state.postSuccess = true;
+                state.isPending = false
+            })
+            .addCase(postProduct.rejected, (state, action) => {
+                state.isError = true;
+                state.error = action.error.message;
+                state.isPending = false;
+                state.postSuccess = false;
             })
     }
 })
